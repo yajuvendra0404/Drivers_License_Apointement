@@ -3,7 +3,29 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "paths":{
+      //--- src tsconfig path ---//
+      "@/*":["./src"],
+
+      //--- app module tsconfig path---//
+      "@app/*":["./src/app"],
+
+      //--- app feature module tsconfig path ---//
+      "@appFeatureModule/*":["./src/app-feature-module"],
+      "@adminModule/*":["./src/app-feature-module/admin"],
+      "@examinerModule/*":["./src/app-feature-module/examiner"],
+      "@driverModule/*":["./src/app-feature-module/driver"],
+
+      //--- app common module tsconfig path ---//
+      "@appCommonModule/*":["./src/app-common-module"],
+      "@authModule/*":["./src/app-common-module/auth"],
+      "@shareModule/*":["./src/app-common-module/shared"],
+
+      //--- assets tsconfig path ---//
+      "@assets/*":["./src/assets"],
+
+    },
   },
   "files": [
     "src/main.ts"

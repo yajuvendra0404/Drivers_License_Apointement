@@ -59,10 +59,6 @@
     "sourceMap": true,
     "outDir": "./dist/app",
     "moduleResolution": "node",
-    "lib": [
-      "es2018",
-      "dom"
-    ],
     "removeComments": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -74,8 +70,7 @@
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-    "allowImportingTsExtensions": true,
-
+    // "allowImportingTsExtensions": true,
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

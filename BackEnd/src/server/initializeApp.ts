@@ -1,31 +1,59 @@
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
+import mongoose, { Model } from 'mongoose';
 
 export default class InitializeApp{
-   app = express();
-   port = 3100;
 
-  constructor(){
+   private app:express.Application;
+   MONGODB_CONNECTION_STRING?:string;
+   PORT?:string;
+   SECRET_KEY?:string;
+   routes: express.IRouter;
+
+  constructor(
+      routes: express.IRouter,
+      MONGODB_CONNECTION_STRING?: string, 
+      PORT?: string, 
+      SECRET_KEY?: string
+  ){
+    // ------ variable initialization
+    this.MONGODB_CONNECTION_STRING = MONGODB_CONNECTION_STRING;
+    this.PORT = PORT;
+    this.SECRET_KEY = SECRET_KEY;
+    this.routes = routes;
+
+    // ------ function initialization
+    this.app = express();
     this.app.use(morgan('tiny'));
-    this.app.use(cors());  
-
+    this.app.use(cors()); 
+    this.initalizeDatabase();
+    this.initializeRouter();
   }
-  
-  routes(){
-    this.app.get('/greet', (req, res) => {
-      console.log('--req',req);
-      console.log("----request recieve ----");
-      console.log("----yajuvendra recieve ----");
-      res.send('Hello World!');
 
+  initializeRouter () { 
+    this.app.use("/",this.routes);
+  } 
+
+  initalizeDatabase () {
+    mongoose.connect("mongodb"+this.MONGODB_CONNECTION_STRING).then(()=>{
+      console.log(`---------- Database connection established`);
+      this.listen();
+    }).catch( err => {
+      console.log(`---------- Database connection error -----`,err)
     });
   }
 
   listen(){
-    this.app.listen(this.port, () => {
-      return console.log(`my own personal ujjajkaj Express is listening at http://localhost:${this.port}`);
+    this.app.listen(this.PORT, () => {
+      return console.log(`
+
+      ---------------------------------------------
+      ---------------------------------------------
+      Express is listening at http://localhost:${this.PORT}
+      ---------------------------------------------
+      ---------------------------------------------
+      `);
     });
   }
-
 }
