@@ -5,18 +5,18 @@ import mongoose, { Model } from 'mongoose';
 
 export default class InitializeApp{
 
-   private app:express.Application;
-   MONGODB_CONNECTION_STRING?:string;
-   PORT?:string;
-   SECRET_KEY?:string;
-   routes: express.IRouter;
+  private app:express.Application;
+  MONGODB_CONNECTION_STRING?:string;
+  PORT?:string;
+  SECRET_KEY?:string;
+  routes: express.IRouter;
 
   constructor(
       routes: express.IRouter,
       MONGODB_CONNECTION_STRING?: string, 
       PORT?: string, 
       SECRET_KEY?: string
-  ){
+  ) {
     // ------ variable initialization
     this.MONGODB_CONNECTION_STRING = MONGODB_CONNECTION_STRING;
     this.PORT = PORT;
@@ -47,7 +47,6 @@ export default class InitializeApp{
   listen(){
     this.app.listen(this.PORT, () => {
       return console.log(`
-
       ---------------------------------------------
       ---------------------------------------------
       Express is listening at http://localhost:${this.PORT}
